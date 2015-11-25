@@ -1,0 +1,11 @@
+{
+  "name": "input-tags",
+  "description": "input for tags",
+  "dependencies": {},
+  "keywords": [
+    "web-components",
+    "input",
+    "tag",
+    "tags"
+  ]
+}
