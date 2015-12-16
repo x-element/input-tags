@@ -3,10 +3,12 @@
     <style>
       .field .name {
         display: block;
+        @apply(--label-tags);
       }
 
       .field {
         @apply(--field-tags);
+        width: 100%;
       }
 
       .field .input {
@@ -21,6 +23,8 @@
 
       .tags {
         display: inline-block;
+        border: 0 !important;
+        width: 100%;
         @apply(--field-tags-items);
       }
 
@@ -43,7 +47,7 @@
       <label class="name">{{label}}</label>
 
       <div class="tags">
-        <template id="tags" is="dom-repeat" items="{{tags}}">
+        <template id="tags" is="dom-repeat" items="{{tag_list}}">
           <div class="tag">
             <span class="value">{{item}}</span>
             <span class="delete" on-click="on_click_delete">x</span>
@@ -78,7 +82,7 @@
         type: Array,
         value: function () { return [' ', ',']; }
       },
-      tags: {
+      tag_list: {
         type: Array,
         value: function () { return []; },
         notify: true
@@ -105,13 +109,13 @@
 
     add_tag: function (tag) {
       if (!this.has_tag(tag)) {
-        this.push('tags', tag);
+        this.push('tag_list', tag);
       }
       this.clear_tag();
     },
 
     has_tag: function (tag) {
-      return this.tags.indexOf(tag) >= 0;
+      return this.tag_list.indexOf(tag) >= 0;
     },
 
     clear_tag: function () {
@@ -122,7 +126,7 @@
       event.stopPropagation();
       var tag = this.$.tags.itemForElement(event.target);
       var index = this.$.tags.indexForElement(event.target);
-      this.splice('tags', index, 1);
+      this.splice('tag_list', index, 1);
     }
 
   });
